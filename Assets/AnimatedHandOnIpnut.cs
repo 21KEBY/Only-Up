@@ -5,7 +5,8 @@ using UnityEngine.InputSystem; //On appèle le input systeme de Unity pour ecoute
 public class AnimatedHandOnIpnut : MonoBehaviour
 {
     public InputActionProperty pinchAnimationAction;//variable public = variable modifiable dans l'editor Unity
-    public Animator handAnimator;
+    public InputActionProperty gripAnimationAction;
+    public Animator handAnimator; //Appelle du composnat animator de Unity 
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class AnimatedHandOnIpnut : MonoBehaviour
     void Update()
     {
         float triggerValue = pinchAnimationAction.action.ReadValue<float>(); //Permettre de savoir la valeur du bouton puisque c'est une value 
-        handAnimator.SetFloat("Trigger", triggerValue)
-        Debug.Log(triggerValue);
+        handAnimator.SetFloat("Trigger", triggerValue);//On va 
+        
     }
 }
