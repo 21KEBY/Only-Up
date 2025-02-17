@@ -372,11 +372,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6daea9c9810b8fd458136d3c2447a664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundedPlayer: 0
-  playerSpeed: 2
   jumpForce: 10
   gravity: -9.8
-  movementJumpMultiplier: 1.3
+  climbProvider: {fileID: 5560575710076278106}
+  jumpAction: {fileID: 6923497069835117597, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!4 &1538437836605423842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
