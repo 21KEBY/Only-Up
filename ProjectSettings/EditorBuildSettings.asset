@@ -18,5 +18,6 @@ EditorBuildSettings:
     path: Assets/MenuScene.unity
     guid: 22aa4c3697ba0ec46805b448833120f7
   m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: aa3a2c73352747649b863127ef902cf5, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: afc95f1511a67fb439347ff0db964f96, type: 2}
