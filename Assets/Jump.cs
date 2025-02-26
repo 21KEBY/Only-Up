@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Jump : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Jump : MonoBehaviour
     [SerializeField] private float jumpheight = 2.0f;
     //Réference a la gravité du character controller du Rig 
     [SerializeField] private float gravityValue = -9.81f;
+    //Récupérer le climb provider
+    public ClimbProvider _climbprovider;
     
     //On récupère le charachter controller
     private CharacterController _characterController;
@@ -25,6 +28,7 @@ public class Jump : MonoBehaviour
 
     private void Jumping(InputAction.CallbackContext obj)
     {
+        if (_climbprovider != null && _climbprovider.climbAnchorInteractable) return;
         if (!_characterController.isGrounded) return;
         _playerVelocity.y += Mathf.Sqrt(jumpheight * -3.0f * gravityValue);
     }
