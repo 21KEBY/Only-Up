@@ -28,13 +28,13 @@ public class Jump : MonoBehaviour
 
     private void Jumping(InputAction.CallbackContext obj)
     {
-        if (_climbprovider != null && _climbprovider.climbAnchorInteractable) return;
         if (!_characterController.isGrounded) return;
         _playerVelocity.y += Mathf.Sqrt(jumpheight * -3.0f * gravityValue);
     }
 
     private void Update()
     {
+        if (_climbprovider != null && _climbprovider.climbAnchorInteractable) return;
         if (_characterController.isGrounded && _playerVelocity.y < 0)
         {
             _playerVelocity.y = 0f;
