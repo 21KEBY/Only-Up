@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public class Dialogue : MonoBehaviour
 {
     [Header("UI Elements")]
-    public GameObject dialoguePanel; // Panneau du dialogue
-    public TextMeshProUGUI dialogueText; // Texte du dialogue
-    public Image characterImage; // Image du personnage
-    public Button startButton; // Bouton pour continuer le dialogue
+    public GameObject dialoguePanel;
+    public TextMeshProUGUI dialogueText;
+    public Image characterImage;
+    public Button startButton;
+    public Image fadePanel; // Image noire pour la transition
 
     [Header("Dialogue Settings")]
     public string[] dialogueLines = {
@@ -23,28 +24,32 @@ public class Dialogue : MonoBehaviour
         "Je suis connecté à ta combinaison pour te guider hors du vaisseau."
     };
 
-    public Sprite[] characterSprites; // Images des personnages
+    public Sprite[] characterSprites;
     private int currentLineIndex = 0;
-    private float textSpeed = 0.05f; // Vitesse du défilement du texte
-    private bool isTyping = false; // Pour vérifier si le texte est en train de s'afficher
-    private Coroutine typingCoroutine; // Stocke la coroutine en cours
+    private float textSpeed = 0.05f;
+    private bool isTyping = false;
+    private Coroutine typingCoroutine;
 
     void Start()
     {
-        dialoguePanel.SetActive(true); // Active le dialogue dès le lancement
-        startButton.onClick.AddListener(ShowNextLine); // Ajoute un listener au bouton
-        typingCoroutine = StartCoroutine(TypeText(dialogueLines[currentLineIndex])); // Lance le premier dialogue
+        dialoguePanel.SetActive(true);
+        startButton.onClick.AddListener(ShowNextLine);
+        typingCoroutine = StartCoroutine(TypeText(dialogueLines[currentLineIndex]));
+
+        // Assurer que le panneau noir est visible et transparent au départ
+        fadePanel.gameObject.SetActive(true);
+        fadePanel.color = new Color(0, 0, 0, 0); // Alpha = 0 (complètement transparent)
     }
 
     void ShowNextLine()
     {
-        if (isTyping) // Si le texte est en train de s'afficher
+        if (isTyping)
         {
-            StopCoroutine(typingCoroutine); // Arrête l'affichage progressif
-            dialogueText.text = dialogueLines[currentLineIndex]; // Affiche tout d'un coup
+            StopCoroutine(typingCoroutine);
+            dialogueText.text = dialogueLines[currentLineIndex];
             isTyping = false;
         }
-        else // Si tout le texte est déjà affiché
+        else
         {
             currentLineIndex++;
 
@@ -52,7 +57,6 @@ public class Dialogue : MonoBehaviour
             {
                 typingCoroutine = StartCoroutine(TypeText(dialogueLines[currentLineIndex]));
 
-                // Changer l’image si nécessaire
                 if (characterSprites.Length > currentLineIndex)
                 {
                     characterImage.sprite = characterSprites[currentLineIndex];
@@ -60,7 +64,7 @@ public class Dialogue : MonoBehaviour
             }
             else
             {
-                LoadNextScene(); // Charge la scène 2 à la fin du dialogue
+                StartCoroutine(FadeToBlackAndLoadScene(4)); // Transition vers la scène 4
             }
         }
     }
@@ -79,8 +83,18 @@ public class Dialogue : MonoBehaviour
         isTyping = false;
     }
 
-    void LoadNextScene()
+    IEnumerator FadeToBlackAndLoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(1); // Charge la scène "MenuScene"
+        float fadeDuration = 1f;
+        float t = 0;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            fadePanel.color = new Color(0, 0, 0, t / fadeDuration); // Fait passer à noir progressivement
+            yield return null;
+        }
+
+        SceneManager.LoadScene(sceneIndex); // Charge la scène 4
     }
 }
