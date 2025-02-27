@@ -1,42 +1,65 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem; // Nouveau système d'entrée
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class Jump : MonoBehaviour
+public class JumpController : MonoBehaviour
 {
-    //ReÌfeÌrence au bouton appuyeÌ
-    [SerializeField] private InputActionReference jumpButton;
-    //Valeur de la hauteur du saut
-    [SerializeField] private float jumpheight = 2.0f;
-    //ReÌference a la graviteÌ du character controller du Rig 
-    [SerializeField] private float gravityValue = -9.81f;
-    
-    //On reÌcupeÌ€re le charachter controller
-    private CharacterController _characterController;
-    //On reÌcupeÌ€re la velocity du joueur
-    private Vector3 _playerVelocity;
+    public float jumpForce = 5f;
+    public float gravity = -9.8f; // Gravité
+    private bool isGrounded;
 
-    //ReÌcupeÌrer la reÌfeÌrence du character controller dans la fonction Awake
-    private void Awake() => _characterController = GetComponent<CharacterController>();
+    private CharacterController characterController;
+    public ClimbProvider climbProvider;
+    // Action d'entrée pour le saut
+    public InputActionReference jumpAction;
 
-    //DeÌclanchement du jump a l'appui du bouton 
-    private void OnEnable() => jumpButton.action.performed += Jumping;
+    private Vector3 velocity;
 
-    private void OnDisable() => jumpButton.action.performed -= Jumping;
-
-    private void Jumping(InputAction.CallbackContext obj)
+    void Start()
     {
-        if (!_characterController.isGrounded) return;
-        _playerVelocity.y += Mathf.Sqrt(jumpheight * -3.0f * gravityValue);
+        // Initialisation du CharacterController
+        characterController = GetComponent<CharacterController>();
+
+        // Activer l'action de saut
+        if (jumpAction != null)
+        {
+            jumpAction.action.Enable();
+            jumpAction.action.performed += ctx => Jump(); // Détecter l'appui sur le bouton de saut
+        }
     }
 
-    private void Update()
+    void Update()
     {
-        if (_characterController.isGrounded && _playerVelocity.y < 0)
-        {
-            _playerVelocity.y = 0f;
-        }
+        print(climbProvider.climbAnchorInteractable);
+        if (climbProvider != null && climbProvider.climbAnchorInteractable) return;
+        // Vérifier si le joueur touche le sol
+        isGrounded = characterController.isGrounded;
 
-        _playerVelocity.y += gravityValue * Time.deltaTime;
-        _characterController.Move(_playerVelocity * Time.deltaTime);
+        // Appliquer la gravité
+        if (!isGrounded)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+        //print(velocity.y);
+        // Appliquer les mouvements et la gravité via le CharacterController
+        characterController.Move(velocity * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        // Effectuer le saut uniquement si le joueur est au sol
+        if (isGrounded)
+        {
+            velocity.y = jumpForce; // Applique la force de saut
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (jumpAction != null)
+        {
+            jumpAction.action.performed -= ctx => Jump(); // Nettoyer l'événement
+        }
     }
 }
