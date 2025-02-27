@@ -17,6 +17,9 @@ public class Dash : MonoBehaviour
     private float _dashTimer = 0f;
     private float _cooldownTimer = 0f;
 
+    // Référence à la caméra principale
+    private Camera _mainCamera;
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -31,6 +34,8 @@ public class Dash : MonoBehaviour
             slider.maxValue = 1;
             slider.value = 1;
         }
+
+        _mainCamera = Camera.main; // Récupérer la caméra principale
     }
 
     private void OnEnable()
@@ -72,7 +77,11 @@ public class Dash : MonoBehaviour
         {
             _isDashing = true;
             _dashTimer = dashDuration;
-            _dashDirection = transform.forward;
+
+            // Calcul de la direction du dash en fonction de la caméra
+            Vector3 forward = _mainCamera.transform.forward;
+            forward.y = 0; // Nous ignorons le mouvement vertical (empêcher le dash de monter ou descendre)
+            _dashDirection = forward.normalized; // Normalisation pour garantir une direction cohérente
 
             if (dashSound != null)
             {

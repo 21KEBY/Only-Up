@@ -64,7 +64,7 @@ public class Dialogue : MonoBehaviour
             }
             else
             {
-                StartCoroutine(FadeToBlackAndLoadScene(4)); // Transition vers la scène 4
+                StartCoroutine(FadeToBlackAndLoadScene(2)); // Transition vers la scène 4
             }
         }
     }
