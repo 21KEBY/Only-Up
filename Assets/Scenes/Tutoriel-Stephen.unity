@@ -2268,6 +2268,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Interaction Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 7281456460034869954, guid: a209396fc5e23194b91ac38d6c3bb4da, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7281456460034869954, guid: a209396fc5e23194b91ac38d6c3bb4da, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 678663748}
     - target: {fileID: 8205311370190267182, guid: a209396fc5e23194b91ac38d6c3bb4da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

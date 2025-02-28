@@ -22,6 +22,7 @@ public class Dash : MonoBehaviour
 
     private void Awake()
     {
+
         _characterController = GetComponent<CharacterController>();
 
         if (slider == null)
