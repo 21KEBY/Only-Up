@@ -64,7 +64,7 @@ public class Dialogue : MonoBehaviour
             }
             else
             {
-                StartCoroutine(FadeToBlackAndLoadScene(2)); // Transition vers la scène 4
+                StartCoroutine(FadeToBlackAndLoadScene(2)); // Transition vers la scène 2
             }
         }
     }
@@ -95,6 +95,6 @@ public class Dialogue : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene(sceneIndex); // Charge la scène 4
+        SceneManager.LoadScene(sceneIndex); // Charge la scène 2
     }
 }
