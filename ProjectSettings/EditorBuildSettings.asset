@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/1 Start Scene.unity
-    guid: 1ea85b1b6a88a5c42b46f0e78e0ef298
+    path: Assets/Scenes/StartSceneJeu.unity
+    guid: a735499a0c388a746b8350f1039fd6ae
   - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: 8696bc4313181c24799be2e42f55f862
@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chrono1.unity
     guid: c84da9fc58c8d0c48a46dea657e25255
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 03d5f1563ff0e474cb455c946aa6094f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: aa3a2c73352747649b863127ef902cf5, type: 2}

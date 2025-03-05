@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -477,7 +481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 5
   gravity: -9.8
-  climbProvider: {fileID: 0}
   jumpAction: {fileID: 0}
 --- !u!114 &8323436789311326777
 MonoBehaviour:

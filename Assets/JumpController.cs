@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem; // Nouveau système d'entrée
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class JumpController : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class JumpController : MonoBehaviour
     private bool isGrounded;
 
     private CharacterController characterController;
-    public ClimbProvider climbProvider;
+
     // Action d'entrée pour le saut
     public InputActionReference jumpAction;
 
@@ -31,8 +30,6 @@ public class JumpController : MonoBehaviour
 
     void Update()
     {
-        print(climbProvider.climbAnchorInteractable);
-        if (climbProvider != null && climbProvider.climbAnchorInteractable) return;
         // Vérifier si le joueur touche le sol
         isGrounded = characterController.isGrounded;
 
@@ -41,7 +38,7 @@ public class JumpController : MonoBehaviour
         {
             velocity.y += gravity * Time.deltaTime;
         }
-        //print(velocity.y);
+        print(velocity.y);
         // Appliquer les mouvements et la gravité via le CharacterController
         characterController.Move(velocity * Time.deltaTime);
     }
